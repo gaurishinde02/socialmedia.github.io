@@ -1,0 +1,143 @@
+<?php
+
+session_start();
+
+include '../helper/logic.php';
+
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/6fefde99a0.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../CSS/styles.css">
+
+    <title>Comments</title>
+
+
+</head>
+
+<body>
+    <div class="navbar">
+        <ul>
+            <a href="../PostPages/index.php" class="logo">Geekster</a>
+
+            <li class="texti"><a href="../SearchPage/search.php">Search</a></li>
+            <li class="texti"><a href="../PostPages/normal_blogs.php">Posts</a></li>
+            <li class="texti"><a href="../PostPages/index.php">Image Blogs</a></li>
+            <li class="texti"><a href="../PostPages/query_blogs.php">Questions</a></li>
+            <li class="texti"><a href="../PostPages/announcements_blogs.php">Announcements</a></li>
+            <li>
+                <div class="sizedbox"></div>
+            </li>
+            <li>
+                <a href="../AddPostPage/add_blog_page.php">
+                    <div class="create">
+                        <i class="fas fa-plus-circle" style="display: inline-block;"></i>
+                        <h5>Create</h5>
+                    </div>
+                </a>
+
+            </li>
+        </ul>
+    </div>
+    <div class="wrapper">
+        <div class="sidebar">
+            <a href="#">
+                <div class="row">
+                    <img src=<?php if ($_SESSION['profileUrl'] != NULL) { ?> <?php echo $_SESSION['profileUrl'];
+                                                                            } else { ?><?php echo "..\images\default.png";
+                                                                            } ?> alt="" height="50px" width="50px">
+                    <div class="col-md-2">
+                        <h6 class="username"><?php echo $_SESSION['username']; ?></h6>
+                        <h6 class="email"><?php echo $_SESSION['email']; ?></h6>
+                    </div>
+                </div>
+            </a>
+            <ul>
+                <li><a href="../PostPages/index.php"><i class="fas fa-home"></i>Home</a></li>
+                <li><a href="../../../GauriWork/profile.php"><i class="fas fa-user-circle"></i>My Profile</a></li>
+                <li><a href="../PostPages/my_posts.php"><i class="fas fa-blog"></i>My Posts</a></li>
+                <li><a href="../PostPages/my_blogs.php"><i class="fas fa-image"></i>My Blogs</a></li>
+                <li><a href="../PostPages/my_query.php"><i class="fas fa-question"></i>My Questions</a></li>
+
+            </ul>
+        </div>
+        <div class="main_content" style="margin-left: 300px; color:white;">
+            <h1 style="font-size:20px; display:block;">Comments</h1>
+            <br><br>
+            <div class="comment_section">
+                <?php foreach ($comments as $c) {
+                    $result = mysqli_query($conn, "SELECT getUsername('" . $c['userID'] . "')")
+                        or die(mysqli_error($conn));
+                    $username = mysqli_fetch_array($result);
+
+                ?>
+                    <div style="margin-bottom: 20px;">
+                        <img style="border-radius: 100px; display: inline-block;" src="../images/default.png" alt="" height="25px" width="25px">
+                        <h6 style="display: inline-block; font-size: 12px;"><?php echo $username[0]; ?></h6>
+                        <h6 style="margin-left: 30px; margin-top: 5px; font-size: 14px;"><?php echo $c['message']; ?></h6>
+                    </div>
+
+                <?php } ?>
+            </div>
+            <br>
+            <div class="row">
+                <form method="POST">
+                    <input type="text" hidden name="id" value=<?php echo $_REQUEST['commentid'] ?>>
+                    <input type="text" name="message" placeholder="Comment on the post..." style="padding-left: 20px; border-radius: 8px; background-color: rgba(50, 50, 50); width: 800px; height:35px; margin-right:20px;" required>
+                    <button type="submit" name="commentSubmit"><i class="fas fa-paper-plane"></i></button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
+
+
+<!-- <div class="modal-content">
+    <span class="close">&times;</span>
+    <?php foreach ($querycomment as $q) { ?>
+        <div class="chatscreen">
+            <h5><?php echo $q['message'] ?></h5>
+        </div>
+    <?php } ?>
+
+    
+</div> -->
+
+<!-- 
+<div class="post">
+    <div class="category">
+        <div class="row postcat">
+            <strong class="cat">BLOG</strong>
+            <i class="fas fa-bookmark"></i>
+        </div>
+    </div>
+    <img class="postimg" src="https://hackr.io/blog/what-is-programming/thumbnail/large" alt="" height="290px" width="290px">
+    <h1 class="posttitle">Blog Post..</h1>
+    <h5 class="postdes">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sequi minus reprehenderit ad modi expedita iure.</h5>
+    <div class="row postinfo">
+        <img src="images/default.png" alt="" height="30px" width="30px">
+        <div class="col-md-2">
+            <h6 class="username">pratik.jh2017</h6>
+        </div>
+        <i class="fas fa-comment chat">
+            <h6 class="comments">6</h6>
+        </i>
+    </div>
+    <p class="datetime">January 16 2021</p>
+</div> -->

@@ -1,0 +1,100 @@
+.navbar {
+    z-index: 500;
+    text-align: center;
+    overflow: hidden;
+    position: fixed;
+    padding-left: 10px;
+    padding-bottom: 10px;
+    background-color: rgba(32, 32, 32);
+    /* backdrop-filter: blur(5px); */
+    /* background-color: rgba(255, 255, 255, 0.03); */
+    /* Set the navbar to fixed position */
+    top: 0;
+    /* Position the navbar at the top of the page */
+    width: 100%;
+    /* Full width */
+}
+
+.logo {
+    float: left;
+    display: block;
+    color: white;
+    padding: 8px 16px;
+    text-decoration: none;
+    margin-left: 0.6rem;
+    margin-top: 0;
+    margin-right: 70px;
+    font-size: 20px;
+    font-weight: 800;
+    font-family: "Poppins", sans-serif;
+    transition: .3s;
+}
+
+.logo:hover {
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+ul {
+    display: inline-block;
+    list-style-type: none;
+    margin: 0;
+    max-width: 400%;
+    /* padding: 1px auto 1px auto; */
+    overflow: hidden;
+    text-align: center;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 5px 5px;
+    text-decoration: none;
+    font-weight: 600;
+    /* margin: 0px 10px 0 1px; */
+}
+
+.btn:hover,
+.dropdown:hover .btn {
+    background-color: #0b7dda;
+}
+
+.topnav {
+    position: relative;
+    left: 10px;
+}
+
+.topnav button {
+    margin-left: 100px;
+    margin-top: 9px;
+    border: none;
+    background: linear-gradient(to right, #ee0979, #ff6a00);
+    padding: 6px 15px 6px 15px;
+    border-radius: 6px;
+    font-weight: 800;
+    font-family: "Poppins", sans-serif;
+    color: white;
+}
+
+li.texti a {
+    text-decoration: none;
+    color: rgba(255, 255, 255, .5);
+    font-weight: 500;
+    margin-top: 8px;
+    font-size: 15px;
+    transition: .3s;
+}
+
+li.texti a:hover {
+    color: white;
+}
+
+.sizedbox {
+    display: inline-block;
+    margin-right: 45em;
+}
